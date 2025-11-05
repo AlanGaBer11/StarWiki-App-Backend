@@ -8,6 +8,7 @@ const sequelize = require("./shared/config/db");
 const corsOptions = require("./shared/config/cors");
 // IMPORTAR RUTAS PRINCIPALES
 const routes = require("./routes/index");
+const serverless = require("serverless-http");
 
 // Sincronizar modelos con la base de datos
 sequelize
@@ -64,8 +65,15 @@ app.use((req, res, next) => {
   });
 });
 
-// INICIAR EL SERVIDOR
+// Exportar handler para Vercel (serverless)
+const handler = serverless(app);
+// Export como función por defecto y como named export
+module.exports = handler;
+module.exports.handler = handler;
 
-app.listen(PORT, () => {
-  console.log(`🚀 Servidor local en http://localhost:${PORT}`);
-});
+// Sólo iniciar servidor en modo local si se ejecuta directamente
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`🚀 Servidor local en http://localhost:${PORT}`);
+  });
+}

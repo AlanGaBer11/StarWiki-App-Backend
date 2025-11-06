@@ -30,7 +30,7 @@ router
   .patch(
     "/updatePost/:id",
     authMiddleware,
-    checkRole(["ADMIN", "EDITOR", "USER"]),
+    checkRole(["ADMIN", "EDITOR"]),
     postController.updatePost.bind(postController)
   )
   .delete(

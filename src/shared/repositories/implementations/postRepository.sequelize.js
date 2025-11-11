@@ -85,11 +85,67 @@ class PostRepository extends IPostRepository {
   }
 
   async findByUser(id_usuario) {
-    return await Post.findAll({ where: { id_usuario } });
+    return await Post.findAll({
+      where: { id_usuario },
+      attributes: [
+        "id",
+        "titulo",
+        "contenido",
+        "url_imagen",
+        "fecha_publicacion",
+        "fecha_actualizacion",
+        "estado",
+      ],
+      include: [
+        {
+          model: User,
+          attributes: [
+            "id",
+            "nombre",
+            "apellido",
+            "nombre_usuario",
+            "email",
+            "fecha_registro",
+          ],
+        },
+        {
+          model: Category,
+          attributes: ["id", "nombre", "descripcion", "fecha_creacion"],
+        },
+      ],
+    });
   }
 
   async findByCategory(id_categoria) {
-    return await Post.findAll({ where: { id_categoria } });
+    return await Post.findAll({
+      where: { id_categoria },
+      attributes: [
+        "id",
+        "titulo",
+        "contenido",
+        "url_imagen",
+        "fecha_publicacion",
+        "fecha_actualizacion",
+        "estado",
+      ],
+      include: [
+        {
+          model: User,
+          attributes: [
+            "id",
+            "nombre",
+            "apellido",
+            "nombre_usuario",
+            "email",
+            "fecha_registro",
+          ],
+        },
+        {
+          model: Category,
+          attributes: ["id", "nombre", "descripcion", "fecha_creacion"],
+        },
+      ],
+    });
   }
 
   async search(query) {

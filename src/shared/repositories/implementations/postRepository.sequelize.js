@@ -28,6 +28,7 @@ class PostRepository extends IPostRepository {
             "apellido",
             "nombre_usuario",
             "email",
+            "avatar_url",
             "fecha_registro",
           ],
         },
@@ -67,6 +68,7 @@ class PostRepository extends IPostRepository {
             "apellido",
             "nombre_usuario",
             "email",
+            "avatar_url",
             "fecha_registro",
           ],
         },
@@ -81,6 +83,33 @@ class PostRepository extends IPostRepository {
   async findByTitle(titulo) {
     return await Post.findOne({
       where: { titulo: { [Op.iLike]: `%${titulo}%` } },
+      attributes: [
+        "id",
+        "titulo",
+        "contenido",
+        "url_imagen",
+        "fecha_publicacion",
+        "fecha_actualizacion",
+        "estado",
+      ],
+      include: [
+        {
+          model: User,
+          attributes: [
+            "id",
+            "nombre",
+            "apellido",
+            "nombre_usuario",
+            "email",
+            "avatar_url",
+            "fecha_registro",
+          ],
+        },
+        {
+          model: Category,
+          attributes: ["id", "nombre", "descripcion", "fecha_creacion"],
+        },
+      ],
     });
   }
 
@@ -105,6 +134,7 @@ class PostRepository extends IPostRepository {
             "apellido",
             "nombre_usuario",
             "email",
+            "avatar_url",
             "fecha_registro",
           ],
         },
@@ -137,6 +167,7 @@ class PostRepository extends IPostRepository {
             "apellido",
             "nombre_usuario",
             "email",
+            "avatar_url",
             "fecha_registro",
           ],
         },

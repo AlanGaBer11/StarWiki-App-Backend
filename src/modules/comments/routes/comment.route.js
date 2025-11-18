@@ -10,19 +10,19 @@ const commentController = new CommentController();
 router
   .get(
     "/getComments",
-    /* authMiddleware, */
+    authMiddleware,
     checkRole(["ADMIN", "EDITOR", "USER"]),
     commentController.findAllComments.bind(commentController)
   )
   .get(
     "/getCommentById/:id",
-    /* authMiddleware, */
+    authMiddleware,
     checkRole(["USER", "ADMIN", "EDITOR"]),
     commentController.findCommentById.bind(commentController)
   )
   .get(
     "/post/:id_post",
-    /* authMiddleware, */
+    authMiddleware,
     checkRole(["USER", "ADMIN", "EDITOR"]),
     commentController.findCommentsByPost.bind(commentController)
   )

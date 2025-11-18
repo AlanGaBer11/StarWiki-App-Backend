@@ -19,8 +19,12 @@ class CommentService {
     return comment;
   }
 
-  async findCommentsByPost(id_post) {
-    const comments = await this.CommentRepository.findCommentsByPost(id_post);
+  async findCommentsByPost(id_post, page = 1, limit = 10) {
+    const comments = await this.CommentRepository.findCommentsByPost(
+      id_post,
+      page,
+      limit
+    );
     if (!comments || comments.length === 0)
       throw new Error("No se encontraron comentarios para este post");
     return comments;

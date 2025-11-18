@@ -77,16 +77,21 @@ class CommentController {
   async findCommentsByPost(req, res) {
     try {
       const { id_post } = req.params;
+      const { page, limit } = validatePagination(req.query);
 
       // Llamar al proceso
-      const comments = await this.CommentProcess.findCommentsByPost(id_post);
+      const result = await this.CommentProcess.findCommentsByPost(
+        id_post,
+        page,
+        limit
+      );
 
-      // Verificar si el post tiene comentarios
-      if (!comments || comments.length === 0) {
+      // Validar si se encontraron comentarios
+      if (!result.comments?.length) {
         return res.status(404).json({
           success: false,
           status: 404,
-          message: "No se encontraron comentarios para el post",
+          message: "No se encontraron comentarios en esta página",
         });
       }
 
@@ -95,7 +100,15 @@ class CommentController {
         success: true,
         status: 200,
         message: "Comentarios del post obtenidos exitosamente",
-        comments,
+        pagination: {
+          currentPage: page,
+          totalPages: result.totalPages,
+          totalComments: result.totalComments,
+          commentsPerPage: limit,
+          hasNextPage: page < result.totalPages,
+          hasPreviousPage: page > 1,
+        },
+        comments: result.comments,
       });
     } catch (error) {
       handleError(res, error, "obtener los comentarios del post");

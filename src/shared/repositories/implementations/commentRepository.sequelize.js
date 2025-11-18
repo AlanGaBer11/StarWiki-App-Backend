@@ -53,8 +53,11 @@ class CommentRepository extends ICommentRepository {
     });
   }
 
-  async findCommentsByPost(id_post) {
-    return await Comment.findAll({
+  async findCommentsByPost(id_post, page = 1, limit = 10) {
+    const offset = (page - 1) * limit;
+    const { count, rows } = await Comment.findAndCountAll({
+      offset,
+      limit,
       where: { id_post },
       include: [
         { model: Post, attributes: ["id", "titulo", "url_imagen"] },
@@ -65,6 +68,12 @@ class CommentRepository extends ICommentRepository {
       ],
       order: [["fecha_creacion", "DESC"]],
     });
+    return {
+      comments: rows,
+      totalComments: count,
+      totalPages: Math.ceil(count / limit),
+      currentPage: page,
+    };
   }
 
   async create(commentData) {

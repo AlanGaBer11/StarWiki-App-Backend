@@ -23,9 +23,9 @@ class CommentProcess {
     }
   }
 
-  async findCommentsByPost(id_post) {
+  async findCommentsByPost(id_post, page, limit) {
     try {
-      return await this.CommentService.findCommentsByPost(id_post);
+      return await this.CommentService.findCommentsByPost(id_post, page, limit);
     } catch (error) {
       console.error("Error al obtener los comentarios del post (process)");
       throw error;

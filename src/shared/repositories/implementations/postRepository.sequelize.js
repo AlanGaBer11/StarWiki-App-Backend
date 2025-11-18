@@ -42,7 +42,7 @@ class PostRepository extends IPostRepository {
 
     return {
       posts: rows,
-      totalPost: count,
+      totalPosts: count,
       totalPages: Math.ceil(count / limit),
       currentPage: page,
     };

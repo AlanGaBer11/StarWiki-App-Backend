@@ -20,7 +20,14 @@ class CommentRepository extends ICommentRepository {
         { model: Post, attributes: ["id", "titulo", "url_imagen"] },
         {
           model: User,
-          attributes: ["id", "nombre", "apellido", "nombre_usuario", "email"],
+          attributes: [
+            "id",
+            "nombre",
+            "apellido",
+            "nombre_usuario",
+            "avatar_url",
+            "email",
+          ],
         },
       ],
       order: [["fecha_creacion", "DESC"]],
@@ -47,7 +54,14 @@ class CommentRepository extends ICommentRepository {
         { model: Post, attributes: ["id", "titulo", "url_imagen"] },
         {
           model: User,
-          attributes: ["id", "nombre", "apellido", "nombre_usuario", "email"],
+          attributes: [
+            "id",
+            "nombre",
+            "apellido",
+            "nombre_usuario",
+            "avatar_url",
+            "email",
+          ],
         },
       ],
     });
@@ -63,7 +77,14 @@ class CommentRepository extends ICommentRepository {
         { model: Post, attributes: ["id", "titulo", "url_imagen"] },
         {
           model: User,
-          attributes: ["id", "nombre", "apellido", "nombre_usuario", "email"],
+          attributes: [
+            "id",
+            "nombre",
+            "apellido",
+            "nombre_usuario",
+            "avatar_url",
+            "email",
+          ],
         },
       ],
       order: [["fecha_creacion", "DESC"]],

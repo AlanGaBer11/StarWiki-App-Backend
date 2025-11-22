@@ -31,20 +31,15 @@ class CommentService {
   }
 
   async createComment(commentData) {
-    const { titulo_post, nombre_usuario, contenido } = commentData;
+    const { titulo_post, nombre_usuario, id_usuario, contenido } = commentData;
 
     // Validar post
     const post = await this.PostRepository.findByTitle(titulo_post);
     if (!post) throw new Error("El post no existe");
 
     // Validar usuario
-    const user = await this.UserRepository.findByUsername(nombre_usuario);
+    const user = await this.UserRepository.findById(id_usuario);
     if (!user) throw new Error("El usuario no existe");
-
-    // Validar comentario duplicado
-    const existingComment = await this.CommentRepository.create({ contenido });
-    if (existingComment && existingComment.length > 0)
-      throw new Error("El comentario ya existe");
 
     // Construir el comentario
     const builder = new CommentBuilder()

@@ -91,7 +91,7 @@ class CommentController {
         return res.status(404).json({
           success: false,
           status: 404,
-          message: "No se encontraron comentarios en esta página",
+          message: "No se encontraron comentarios de este post en esta página",
         });
       }
 
@@ -119,8 +119,9 @@ class CommentController {
     try {
       const { titulo_post, contenido } = req.body;
 
+      const id_usuario = req.user?.id;
       const nombre_usuario = req.user?.nombre_usuario;
-      if (!nombre_usuario) {
+      if (!id_usuario || !nombre_usuario) {
         return res.status(401).json({
           success: false,
           status: 401,
@@ -140,6 +141,7 @@ class CommentController {
       // Llamar al proceso
       const newComment = await this.CommentProcess.createComment({
         titulo_post,
+        id_usuario,
         nombre_usuario,
         contenido,
       });

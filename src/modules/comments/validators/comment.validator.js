@@ -1,23 +1,31 @@
 const { check, validationResult } = require("express-validator");
 
-const commentValidator = [
+const validateResult = (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+  next();
+};
+
+const createCommentValidator = [
   check("titulo_post")
     .notEmpty()
     .withMessage("El titulo del post es obligatorio"),
-
-  /*   check("nombre_usuario")
-    .notEmpty()
-    .withMessage("El nombre de usuario es obligatorio"), */
-
   check("contenido").notEmpty().withMessage("El contenido es obligatorio"),
-
-  (req, res, next) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
-    next();
-  },
+  validateResult,
 ];
 
-module.exports = commentValidator;
+const updateCommentValidator = [
+  check("titulo_post")
+    .optional()
+    .notEmpty()
+    .withMessage("El titulo del post no puede estar vacío"),
+  check("contenido")
+    .optional()
+    .notEmpty()
+    .withMessage("El contenido no puede estar vacío"),
+  validateResult,
+];
+
+module.exports = { createCommentValidator, updateCommentValidator };

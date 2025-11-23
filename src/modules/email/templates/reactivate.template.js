@@ -8,8 +8,8 @@ const generate = (userData) => {
   const text = `Hola ${nombre}, tu cuenta de StarWiki (${email}) ha sido reactivada.`;
 
   const html = `
-    ${emailHeplers.getEmailHeader()}
-    <div style="${emailHeplers.getContainerStyles()}">
+    ${emailHelpers.getEmailHeader()}
+    <div style="${emailHelpers.getContainerStyles()}">
       <h1 style="color: #28a745; text-align: center;">Cuenta Reactivada</h1>
       <p>Hola <strong>${nombre}</strong>,</p>
       <p>Nos complace informarte que tu cuenta de StarWiki ha sido reactivada.</p>
@@ -25,7 +25,7 @@ const generate = (userData) => {
       <p>Si tienes alguna pregunta o necesitas ayuda, no dudes en contactarnos.</p>
       <p>¡Gracias por seguir con nosotros!</p>
       
-      ${emailHeplers.getEmailFooter()}
+      ${emailHelpers.getEmailFooter()}
     </div>
   `;
 

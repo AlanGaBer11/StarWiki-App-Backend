@@ -1,7 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const CategoryController = require("../controllers/category.controller");
-const validator = require("../validators/category.validator");
+const {
+  createCategoryValidator,
+  updateCategoryValidator,
+} = require("../validators/category.validator");
 const authMiddleware = require("../../../shared/middlewares/auth.middleware");
 const { checkRole } = require("../../../shared/middlewares/rol.middleware");
 
@@ -22,16 +25,16 @@ router
   )
   .post(
     "/createCategory",
-    validator,
     authMiddleware,
     checkRole(["ADMIN", "EDITOR"]),
+    createCategoryValidator,
     categoryController.createCategory.bind(categoryController)
   )
   .patch(
     "/updateCategory/:id",
-    /* validator, */
     authMiddleware,
     checkRole(["ADMIN", "EDITOR"]),
+    updateCategoryValidator,
     categoryController.updateCategory.bind(categoryController)
   )
   .delete(

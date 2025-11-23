@@ -1,7 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const UserController = require("../controllers/user.controller");
-const validator = require("../validators/user.validator");
+const {
+  createUserValidator,
+  updateUserValidator,
+} = require("../validators/user.validator");
 const authMiddleware = require("../../../shared/middlewares/auth.middleware");
 const { checkRole } = require("../../../shared/middlewares/rol.middleware");
 
@@ -22,16 +25,16 @@ router
   )
   .post(
     "/createUser",
-    validator,
     authMiddleware,
     checkRole(["ADMIN"]),
+    createUserValidator,
     userController.createUser.bind(userController)
   )
   .patch(
     "/updateUser/:id",
-    /* validator, */
     authMiddleware,
     checkRole(["ADMIN", "USER", "EDITOR"]),
+    updateUserValidator,
     userController.updateUser.bind(userController)
   )
   .delete(
@@ -43,11 +46,13 @@ router
   .patch(
     "/deactivateUser/:id",
     authMiddleware,
+    checkRole(["ADMIN"]),
     userController.deactivateUser.bind(userController)
   )
   .patch(
     "/reactivateUser/:id",
     authMiddleware,
+    checkRole(["ADMIN"]),
     userController.reactivateUser.bind(userController)
   );
 

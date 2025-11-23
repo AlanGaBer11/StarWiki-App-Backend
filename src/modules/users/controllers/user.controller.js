@@ -111,7 +111,7 @@ class UserController {
       res.status(201).json({
         success: true,
         status: 201,
-        message: "Usuario creado exitosamente",
+        message: `Usuario '${newUser.nombre_usuario}'(ID: ${newUser.id}) creado exitosamente`,
         newUser,
       });
     } catch (error) {
@@ -190,7 +190,7 @@ class UserController {
       res.status(200).json({
         success: true,
         status: 200,
-        message: "Usuario actualizado exitosamente",
+        message: `Usuario '${updatedUser.nombre_usuario}' (ID: ${id}) actualizado exitosamente`,
         updatedUser,
       });
     } catch (error) {
@@ -227,7 +227,7 @@ class UserController {
       res.status(200).json({
         success: true,
         status: 200,
-        message: "Usuario eliminado exitosamente",
+        message: `Usuario '${existingUser.nombre_usuario}' (ID: ${id}) eliminado exitosamente`,
       });
     } catch (error) {
       handleError(res, error, "eliminar el usuario");
@@ -272,7 +272,7 @@ class UserController {
       res.status(200).json({
         success: true,
         status: 200,
-        message: "Usuario desactivado exitosamente",
+        message: `Usuario '${existingUser.nombre_usuario}' (ID: ${id}) desactivado exitosamente`,
       });
     } catch (error) {
       handleError(res, error, "desactivar el usuario");
@@ -299,7 +299,7 @@ class UserController {
         return res.status(404).json({
           success: false,
           status: 404,
-          message: "Usuario no encontrado ",
+          message: "Usuario no encontrado",
         });
       }
 
@@ -316,7 +316,7 @@ class UserController {
       res.status(200).json({
         success: true,
         status: 200,
-        message: "Usuario reactivado exitosamente",
+        message: `Usuario '${existingUser.nombre_usuario}' (ID: ${id}) reactivado exitosamente`,
       });
     } catch (error) {
       handleError(res, error, "reactivar el usuario");

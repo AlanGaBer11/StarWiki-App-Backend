@@ -146,11 +146,15 @@ class CommentController {
         contenido,
       });
 
+      const preview =
+        newComment.contenido.slice(0, 30) +
+        (newComment.contenido.length > 30 ? "..." : "");
+
       // Enviar respuesta
       res.status(201).json({
         success: true,
         status: 201,
-        message: "Comentario creado exitosamente",
+        message: `Comentario '${preview}' (ID: ${newComment.id}) creado exitosamente`,
         newComment,
       });
     } catch (error) {
@@ -205,11 +209,15 @@ class CommentController {
         commentData
       );
 
+      const preview =
+        updatedComment.contenido.slice(0, 30) +
+        (updatedComment.contenido.length > 30 ? "..." : "");
+
       // Enviar respuesta
       res.status(200).json({
         success: true,
         status: 200,
-        message: "Comentario actualizado exitosamente",
+        message: `Comentario '${preview}' (ID: ${id}) actualizado exitosamente`,
         updatedComment,
       });
     } catch (error) {
@@ -244,10 +252,14 @@ class CommentController {
       // Eliminar el comantario
       await this.CommentProcess.deleteComment(id);
 
+      const preview =
+        existingComment.contenido.slice(0, 30) +
+        (existingComment.contenido.length > 30 ? "..." : "");
+
       res.status(200).json({
         success: true,
         status: 200,
-        message: "Comentario eliminado exitosamente",
+        message: `Comentario '${preview}' (ID: ${id}) eliminado exitosamente`,
       });
     } catch (error) {
       handleError(res, error, "eliminar el comentario");

@@ -234,7 +234,7 @@ class PostController {
       res.status(201).json({
         success: true,
         status: 201,
-        message: "Post creado exitosamente",
+        message: `Post '${newPost.titulo}' (ID: ${newPost.id}) creado exitosamente`,
         newPost,
       });
     } catch (error) {
@@ -270,7 +270,7 @@ class PostController {
           success: false,
           status: 403,
           message:
-            "No tienes permiso para actualizar este post. Solo el autor puede hacerlo.",
+            "No tienes permiso para actualizar este post. Solo el autor puede hacerlo",
         });
       }
 
@@ -288,7 +288,7 @@ class PostController {
       res.status(200).json({
         success: true,
         status: 200,
-        message: "Post actualizado exitosamente",
+        message: `Post '${updatedPost.titulo}' (ID: ${id}) actualizado exitosamente`,
         updatedPost,
       });
     } catch (error) {
@@ -316,7 +316,7 @@ class PostController {
           success: false,
           status: 403,
           message:
-            "No tienes permiso para eliminar este post. Solo el autor puede hacerlo.",
+            "No tienes permiso para eliminar este post. Solo el autor puede hacerlo",
         });
       }
 
@@ -327,7 +327,7 @@ class PostController {
       res.status(200).json({
         success: true,
         status: 200,
-        message: "Post eliminado exitosamente",
+        message: `Post '${existingPost.titulo}' (ID: ${id}) eliminado exitosamente`,
       });
     } catch (error) {
       handleError(res, error, "eliminar el post");

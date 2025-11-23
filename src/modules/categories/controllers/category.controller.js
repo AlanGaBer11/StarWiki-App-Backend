@@ -120,7 +120,7 @@ class CategoryController {
       res.status(201).json({
         success: true,
         status: 201,
-        message: "Categoría creada exitosamente",
+        message: `Categoría '${newCategory.nombre}' (ID: ${newCategory.id}) creada exitosamente`,
         newCategory,
       });
     } catch (error) {
@@ -176,7 +176,7 @@ class CategoryController {
       res.status(200).json({
         success: true,
         status: 200,
-        message: "Categoría actualizada exitosamente",
+        message: `Categoría '${updatedCategory.nombre}' (ID: ${id}) actualizada exitosamente`,
         updatedCategory,
       });
     } catch (error) {
@@ -214,7 +214,7 @@ class CategoryController {
       res.status(200).json({
         success: true,
         status: 200,
-        message: "Categoría eliminada exitosamente",
+        message: `Categoría '${existingCategory.nombre}' (ID: ${id}) eliminada exitosamente`,
       });
     } catch (error) {
       handleError(res, error, "eliminar la categoría");

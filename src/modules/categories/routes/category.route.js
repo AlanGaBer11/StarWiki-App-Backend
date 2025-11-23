@@ -26,14 +26,14 @@ router
   .post(
     "/createCategory",
     authMiddleware,
-    checkRole(["ADMIN", "EDITOR"]),
+    checkRole(["ADMIN"]),
     createCategoryValidator,
     categoryController.createCategory.bind(categoryController)
   )
   .patch(
     "/updateCategory/:id",
     authMiddleware,
-    checkRole(["ADMIN", "EDITOR"]),
+    checkRole(["ADMIN"]),
     updateCategoryValidator,
     categoryController.updateCategory.bind(categoryController)
   )

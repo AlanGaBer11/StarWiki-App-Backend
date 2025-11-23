@@ -1,7 +1,7 @@
 const corsOptions = {
   origin: [
     "http://localhost:8100", // Frontend en desarrollo
-    "https://star-wiki-app-frontend.vercel.app/inicio", //Fronten en producción,
+    "https://star-wiki-app-frontend.vercel.app/inicio", //Frontend en producción,
   ],
   credentials: true,
   methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],

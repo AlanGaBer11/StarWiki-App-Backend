@@ -1,7 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const PostController = require("../controllers/post.controller");
-const validator = require("../validators/post.validator");
+const {
+  createPostValidator,
+  updatePostValidator,
+} = require("../validators/post.validator");
 const authMiddleware = require("../../../shared/middlewares/auth.middleware");
 const { checkRole } = require("../../../shared/middlewares/rol.middleware");
 
@@ -22,15 +25,16 @@ router
   .get("/search", postController.searchPosts.bind(postController))
   .post(
     "/createPost",
-    validator,
     authMiddleware,
     checkRole(["ADMIN", "EDITOR"]),
+    createPostValidator,
     postController.createPost.bind(postController)
   )
   .patch(
     "/updatePost/:id",
     authMiddleware,
     checkRole(["ADMIN", "EDITOR"]),
+    updatePostValidator,
     postController.updatePost.bind(postController)
   )
   .delete(

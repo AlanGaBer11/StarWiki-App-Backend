@@ -71,7 +71,7 @@ class AuthController {
       const user = await this.AuthProcess.login({ email, contrasena });
 
       const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
-        expiresIn: "15m",
+        expiresIn: "30m",
       });
 
       return res.status(200).json({

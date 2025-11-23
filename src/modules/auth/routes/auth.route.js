@@ -1,13 +1,20 @@
 const express = require("express");
 const router = express.Router();
 const AuthController = require("../controllers/auth.controller");
-const validator = require("../validators/auth.validator");
+const {
+  registerValidator,
+  loginValidator,
+} = require("../validators/auth.validator");
 
 const authController = new AuthController();
 
 router
-  .post("/register", validator, authController.register.bind(authController))
-  .post("/login", validator, authController.login.bind(authController))
+  .post(
+    "/register",
+    registerValidator,
+    authController.register.bind(authController)
+  )
+  .post("/login", loginValidator, authController.login.bind(authController))
   .post(
     "/send-verification-code",
     authController.sendVerificationCode.bind(authController)

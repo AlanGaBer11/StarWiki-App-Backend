@@ -152,7 +152,7 @@ class AuthService {
       }
 
       // Verificar el usuario
-      await this.AuthRepository(email, {
+      await this.AuthRepository.verifyUser(email, {
         verificado: true,
         codigo_verificacion: null,
         expiracion_codigo: null,
